@@ -1,0 +1,18 @@
+{
+    "sourceFile": "basic_if.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1649906411537,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1649906411537,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n\nint main() {\n    int currVal = 0, val = 0;\n    if (std::cin >> currVal) {\n        int cnt = 1;\n        while (std::cin >> val) {\n            if (val == currVal)\n                ++cnt;\n            else {\n                std::cout << currVal << \" occurs \" << cnt << \" times\" << std::endl;\n                currVal = val;\n                cnt = 1;\n            }\n        }\n        std::cout << currVal << \" occurs \" << cnt << \" times\" << std::endl;\n    }\n    return 0;\n}"
+        }
+    ]
+}

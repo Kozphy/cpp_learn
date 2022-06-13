@@ -1,0 +1,26 @@
+{
+    "sourceFile": "basic_for.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1649903980124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1649904014689,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,8 @@\n # include<iostream>\n \n+int main(){\n+    int sum = 0;\n+    for (int val = 1; val <=10; ++val) {\n+        sum += val;\n+    }\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1649904069055,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,10 @@\n # include<iostream>\n \n int main(){\n     int sum = 0;\n-    for (int val = 1; val <=10; ++val) {\n+    for (int val = 1; val <=10; ++val) \n         sum += val;\n-    }\n+    std::cout << \"Sum of 1 to 10 inclusive is \" << sum << std::endl;\n+    return 0;\n+    \n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1649903980124,
+            "name": "Commit-0",
+            "content": "# include<iostream>\n\n"
+        }
+    ]
+}

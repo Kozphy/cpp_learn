@@ -1,0 +1,22 @@
+{
+    "sourceFile": "unkown_input.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1649904260433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1649904278785,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,5 +4,6 @@\n     int sum = 0, value = 0;\n     while (std::cin >> value)\n         sum += value;\n     std::cout << \"Sum is: \" << sum << std::endl;\n+    return 0;\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1649904260433,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n\nint main() {\n    int sum = 0, value = 0;\n    while (std::cin >> value)\n        sum += value;\n    std::cout << \"Sum is: \" << sum << std::endl;\n}"
+        }
+    ]
+}

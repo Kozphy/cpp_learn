@@ -1,0 +1,50 @@
+{
+    "sourceFile": "main.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 8,
+            "patches": [
+                {
+                    "date": 1649908424765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1649908488088,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,9 @@\n #include <iostream>\n-#include \n\\ No newline at end of file\n+#include \"Sales_item.h\"\n+\n+int main() {\n+    Sales_item book;\n+    std::cin >> book;\n+    std::cout << book << std::endl;\n+    return 0;\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1649909455179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <iostream>\n-#include \"Sales_item.h\"\n+#include \"C++_primer\\1\\\"\n \n int main() {\n     Sales_item book;\n     std::cin >> book;\n"
+                },
+                {
+                    "date": 1649909464845,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <iostream>\n-#include \"C++_primer\\1\\\"\n+#include \"C++_primer\\1\\Sales_item.h\"\n \n int main() {\n     Sales_item book;\n     std::cin >> book;\n"
+                },
+                {
+                    "date": 1649909730574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <iostream>\n-#include \"C++_primer\\1\\Sales_item.h\"\n+#include \"./C++_primer/1/\"\n \n int main() {\n     Sales_item book;\n     std::cin >> book;\n"
+                },
+                {
+                    "date": 1649909739465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n #include <iostream>\n-#include \"./C++_primer/1/\"\n+#include \"./C++_primer/1/Sales_item.h\"\n \n int main() {\n     Sales_item book;\n     std::cin >> book;\n"
+                },
+                {
+                    "date": 1649919669937,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n #include <iostream>\n #include \"./C++_primer/1/Sales_item.h\"\n \n int main() {\n-    Sales_item book;\n-    std::cin >> book;\n-    std::cout << book << std::endl;\n+    Sales_item item1, item2;\n+    std::cin >> item1 >> item2;\n+    std::cin >> item1 >> item2;\n+    std::cout << item1 + item2 << std::endl;\n     return 0;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1649919787355,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,8 @@\n #include \"./C++_primer/1/Sales_item.h\"\n \n int main() {\n     Sales_item item1, item2;\n-    std::cin >> item1 >> item2;\n-    std::cin >> item1 >> item2;\n+        std::cin >> item1 >> item2;\n     std::cout << item1 + item2 << std::endl;\n     return 0;\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1649920186806,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,8 +2,13 @@\n #include \"./C++_primer/1/Sales_item.h\"\n \n int main() {\n     Sales_item item1, item2;\n-        std::cin >> item1 >> item2;\n-    std::cout << item1 + item2 << std::endl;\n-    return 0;\n+    std::cin >> item1 >> item2;\n+    if (item1.isbn() == item2.isbn()) {\n+        std::cout << item1 + item2 << std::endl;\n+        return 0;\n+    } else {\n+        std::cerr << \"Data must refer to same ISBN\" << std::endl;\n+        return -1\n+    }\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1649908424765,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n#include "
+        }
+    ]
+}

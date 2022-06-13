@@ -1,0 +1,26 @@
+{
+    "sourceFile": "bookstore.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1650727456816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1650727722326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,2 +1,23 @@\n #include <iostream>\n-#include \"\"\n\\ No newline at end of file\n+#include \"./C++_primer/1/Sales_item.h\"\n+\n+int main()\n+{\n+    Sales_item total;\n+    if (std::cin >> total) {\n+        Sales_item trans;\n+        while (std::cin >> trans) {\n+            if (total.isbn() == trans.isbn())\n+                total += trans;\n+            else {\n+                std::cout << total << std::endl;\n+                total = trans;\n+            } \n+        }\n+        std::cout << total << std::endl;\n+    } else {\n+        std::cerr << \"No data?!\" << std::endl;\n+        return -1\n+    }\n+\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1650727732137,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,8 +16,8 @@\n         }\n         std::cout << total << std::endl;\n     } else {\n         std::cerr << \"No data?!\" << std::endl;\n-        return -1\n+        return -1;\n     }\n-\n+    return 0;\n }\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1650727456816,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n#include \"\""
+        }
+    ]
+}
