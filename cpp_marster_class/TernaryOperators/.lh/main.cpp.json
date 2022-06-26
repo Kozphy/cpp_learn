@@ -1,0 +1,18 @@
+{
+    "sourceFile": "main.cpp",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1654531425657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1654531425657,
+            "name": "Commit-0",
+            "content": "#include <iostream>\n\nint main(){\n    int number = 15; // Decimal\n    int number2 = 017; //Octal.\n    int number3 = 0x0f; //Hexadecimal\n    int number4 = 0b00001111; // Binary - C++14\n\n}"
+        }
+    ]
+}
