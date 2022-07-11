@@ -34,14 +34,67 @@ int main() {
     std::cout << "std::strcmp (" << string_data1 << "," << string_data2 << ") : "
     << std::strcmp(string_data1, string_data2) << std::endl;
 
-    string_data1 = "Alabama";
-    string_data2 = "Alabamb";
+    string_data1 = "Alabamb";
+    string_data2 = "Alabama";
 
     //Print out the comparison
     std::cout << "std::strcmp (" << string_data1 << "," << string_data2 << ") : "
     << std::strcmp(string_data1,string_data2) << std::endl;
-    string_data1 = "Alacama";
+    string_data1 = "Alabama";
     string_data2 = "Alabama";
 
+    //Print out the comparison
+    std::cout << "std::strcmp (" << string_data1 << "," << string_data2 << ") : "
+    << std::strcmp(string_data1,string_data2) << std::endl;
+
+    // std::strncmp : int strcmp(const *lhs, const char *rhs, std::size_t count);
+    // Compares n characters in the strings
+    // Returns: Negative value if lhs appears before rhs in lexicographical order.
+    // Zero if lhs and rhs compare equal, or if count is zero.
+    // Posive value if lhs appears after rhs in lexicographical order.
+    size_t n{3};
+    std::cout << std::endl;
+    std::cout << "std::strncmp: " << std::endl;
+    std::cout << "std::strncmp (" << string_data1 << "," << string_data2 << "," << n <<") : "
+    << std::strncmp(string_data1, string_data2, n) << std::endl;
+
+    string_data1="aaaia";
+    string_data2 = "aabnce";
+    std::cout << "std::strncmp (" << string_data1 << "," << string_data2 << "," << n << ") : "
+    << std::strncmp(string_data1, string_data2, n) << std::endl;
+
+    string_data1="aacia";
+    string_data2 = "aabnce";
+    std::cout << "std::strncmp (" << string_data1 << "," << string_data2 << "," << n << ") : "
+    << std::strncmp(string_data1, string_data2, n) << std::endl;
+
+    // std::strchar: find first occurrence
+    std::cout << std::endl;
+    std::cout << "std::strchr: " << std::endl;
+
+    const char *str {"Try not. Do, or do not. There is no try."};
+    char target = 'T';
+    const char *result = str;
+    int iterations{};
+
+    while((result = std::strchr(result, target))!= nullptr){
+        std::cout << "Found '" << target 
+        << "' starting at '" << result << "'\n";
+        // increment result, otherwisse we'll find target at the same location
+        ++result;
+        ++iterations;
+    }
+    std::cout << "iterations: " << iterations << std::endl;
+
+    // std::strrchr: find last occurrence
+    std::cout << std::endl;
+    std::cout << "std::strrchr: " << std::endl;
+
+    char input[] = "/home/user/hello.cpp";
+    char *output = std::strrchr(input, '/');
+    if(output) {
+        std::cout << output +1 << std::endl; // +1 because we want to start printing past
+                                            // tge cgaracter found by std::strrchr.
+    }
     return 0;
 }

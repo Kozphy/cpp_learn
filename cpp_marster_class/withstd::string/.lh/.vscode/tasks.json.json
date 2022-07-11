@@ -1,0 +1,30 @@
+{
+    "sourceFile": ".vscode/tasks.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1654528845108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1654528883394,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \t\t\t\"detail\": \"compiler: /home/linuxbrew/.linuxbrew/bin/g++-11\"\n \t\t},\n \t\t{\n \t\t\t\"type\": \"cppbuild\",\n-\t\t\t\"label\": \"C/C++: clang++-12 build active file\",\n+\t\t\t\"label\": \"Build with clang 10.0.1\",\n \t\t\t\"command\": \"/usr/bin/clang++-12\",\n \t\t\t\"args\": [\n \t\t\t\t\"-fdiagnostics-color=always\",\n \t\t\t\t\"-g\",\n"
+                },
+                {
+                    "date": 1654528946677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \t\t\t\"detail\": \"compiler: /home/linuxbrew/.linuxbrew/bin/g++-11\"\n \t\t},\n \t\t{\n \t\t\t\"type\": \"cppbuild\",\n-\t\t\t\"label\": \"Build with clang 10.0.1\",\n+\t\t\t\"label\": \"Build with clang 12.0.0\",\n \t\t\t\"command\": \"/usr/bin/clang++-12\",\n \t\t\t\"args\": [\n \t\t\t\t\"-fdiagnostics-color=always\",\n \t\t\t\t\"-g\",\n"
+                },
+                {
+                    "date": 1654528968748,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,13 +25,13 @@\n \t\t\t\"type\": \"cppbuild\",\n \t\t\t\"label\": \"Build with clang 12.0.0\",\n \t\t\t\"command\": \"/usr/bin/clang++-12\",\n \t\t\t\"args\": [\n-\t\t\t\t\"-fdiagnostics-color=always\",\n \t\t\t\t\"-g\",\n-\t\t\t\t\"${file}\",\n+\t\t\t\t\"-std=c++20\",\n+\t\t\t\t\"${workspaceFolder}/*.cpp\",\n \t\t\t\t\"-o\",\n-\t\t\t\t\"${fileDirname}/${fileBasenameNoExtension}\"\n+\t\t\t\t\"${fileDirname}/rooster\"\n \t\t\t],\n \t\t\t\"options\": {\n \t\t\t\t\"cwd\": \"${fileDirname}\"\n \t\t\t},\n"
+                }
+            ],
+            "date": 1654528845108,
+            "name": "Commit-0",
+            "content": "{\n\t\"version\": \"2.0.0\",\n\t\"tasks\": [\n\t\t{\n\t\t\t\"type\": \"cppbuild\",\n\t\t\t\"label\": \"Build with GCC 11.2.0\",\n\t\t\t\"command\": \"/home/linuxbrew/.linuxbrew/bin/g++-11\",\n\t\t\t\"args\": [\n\t\t\t\t\"-g\",\n\t\t\t\t\"-std=c++20\",\n\t\t\t\t\"${workspaceFolder}/*.cpp\",\n\t\t\t\t\"-o\",\n\t\t\t\t\"${fileDirname}/rooster\"\n\t\t\t],\n\t\t\t\"options\": {\n\t\t\t\t\"cwd\": \"${fileDirname}\"\n\t\t\t},\n\t\t\t\"problemMatcher\": [\n\t\t\t\t\"$gcc\"\n\t\t\t],\n\t\t\t\"group\": \"build\",\n\t\t\t\"detail\": \"compiler: /home/linuxbrew/.linuxbrew/bin/g++-11\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"cppbuild\",\n\t\t\t\"label\": \"C/C++: clang++-12 build active file\",\n\t\t\t\"command\": \"/usr/bin/clang++-12\",\n\t\t\t\"args\": [\n\t\t\t\t\"-fdiagnostics-color=always\",\n\t\t\t\t\"-g\",\n\t\t\t\t\"${file}\",\n\t\t\t\t\"-o\",\n\t\t\t\t\"${fileDirname}/${fileBasenameNoExtension}\"\n\t\t\t],\n\t\t\t\"options\": {\n\t\t\t\t\"cwd\": \"${fileDirname}\"\n\t\t\t},\n\t\t\t\"problemMatcher\": [\n\t\t\t\t\"$gcc\"\n\t\t\t],\n\t\t\t\"group\": \"build\",\n\t\t\t\"detail\": \"compiler: /usr/bin/clang++-12\"\n\t\t}\n\t]\n}"
+        }
+    ]
+}
