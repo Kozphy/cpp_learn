@@ -5,13 +5,16 @@
 #include <limits>
 
 int brute(std::vector<int> nums);
-int kadane_algo(std::vector<int> nums);
+int kadane_algo1(std::vector<int> nums);
+int kadane_algo2(std::vector<int> nums);
 
 int main() {
-    std::vector<int> nums {5,4,-1,7,8};
+    std::vector<int> nums {1,2};
     brute(nums);
     std::cout << std::endl;
-    kadane_algo(nums);
+    kadane_algo1(nums);
+    std::cout << std::endl;
+    kadane_algo2(nums);
     return 0;
 }
 
@@ -23,11 +26,13 @@ int brute(std::vector<int> nums)
 
     std::printf("i j : sum\n");
     for (int i{start}; i < end; i++){
+        int sum{0};
         for(int j{i}; j < end; j++){
-            int sum{0};
-            for (int k = i; k <= j; k++){
-                sum+=nums[k];
-            }
+            sum+=nums[j];
+            // int sum{0};
+            // for (int k = i; k <= j; k++){
+            //     sum+=nums[k];
+            // }
 
             if (sum > max){
                 max = sum;
@@ -40,7 +45,7 @@ int brute(std::vector<int> nums)
     
 }
 
-int kadane_algo(std::vector<int> nums)
+int kadane_algo1(std::vector<int> nums)
 {
     std::vector<int> max_arr{};
 
@@ -50,11 +55,11 @@ int kadane_algo(std::vector<int> nums)
             continue;
         }
 
-        if (max_arr[i - 1] > 0){
+        if ((max_arr[i - 1] + nums[i]) > nums[i]){
             max_arr.push_back(nums[i] + max_arr[i - 1]);
         }
 
-        if (max_arr[i - 1] < 0){
+        if ((max_arr[i - 1]+ nums[i]) < nums[i]){
             max_arr.push_back(nums[i]);
         }
     }
@@ -71,4 +76,25 @@ int kadane_algo(std::vector<int> nums)
     return 0;
 }
 
+int kadane_algo2(std::vector<int> nums){
+    int lnums = nums.size();
+    if (lnums == 1) {
+        return nums[0];
+    }
+    int max{std::numeric_limits<int>::min()};
+    int t{0};
 
+    for (int i{0}; i < lnums; i++) {
+        t+=nums[i];
+        if (t < nums[i]){
+            t = nums[i];
+        }
+        if (t > max) {
+            max = t;
+        }
+        std::cout << "t: " << t << std::endl;
+    }
+    std::cout << "max: " << max << std::endl;
+    return max;
+    
+}
