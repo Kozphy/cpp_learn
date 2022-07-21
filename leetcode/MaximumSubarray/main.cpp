@@ -9,7 +9,7 @@ int kadane_algo1(std::vector<int> nums);
 int kadane_algo2(std::vector<int> nums);
 
 int main() {
-    std::vector<int> nums {1,2};
+    std::vector<int> nums {-2,1,-3,4,-1,2,1,-5,4};
     brute(nums);
     std::cout << std::endl;
     kadane_algo1(nums);
@@ -55,11 +55,11 @@ int kadane_algo1(std::vector<int> nums)
             continue;
         }
 
-        if ((max_arr[i - 1] + nums[i]) > nums[i]){
+        if (max_arr[i-1] > 0){
             max_arr.push_back(nums[i] + max_arr[i - 1]);
         }
 
-        if ((max_arr[i - 1]+ nums[i]) < nums[i]){
+        if (max_arr[i-1] < 0){
             max_arr.push_back(nums[i]);
         }
     }
