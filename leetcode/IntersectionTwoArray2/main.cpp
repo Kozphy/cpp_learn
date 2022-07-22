@@ -2,22 +2,25 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <algorithm>
 
-void print(int id, const std::vector<int>& container)
+template <typename T, typename C>
+void print(T name, const C &container)
 {
-    std::cout << id << ". ";
+    std::cout << name << ". ";
     for (const int x: container) {
          std::cout << x << ' ';
     }
     std::cout << '\n';
 }
- 
- void print_map(std::string name,std::map<int, int> mapping){
+
+ template <typename T, typename C>
+ void print(std::string name,std::map<int, int> &mapping){
     std::cout << "print map name: " << name << std::endl;
     for (auto &v: mapping){
         std::cout << v.first << " : " << v.second << std::endl;
     }
- }
+}
 
 using namespace std;
 
@@ -66,8 +69,27 @@ vector<int> intersection_hashmap(vector<int> nums1, vector<int> nums2){
 }
 
 vector<int> intersection_two_point(vector<int> nums1, vector<int> nums2){
-    int p1 = static_cast<int>(nums1.size()) - 1;
-    int p2 = static_cast<int>(nums2.size()) - 1;
+    int p1 = 0;
+    int p2 = 0;
+    sort(nums1.begin(), nums1.end());
+    sort(nums2.begin(), nums2.end());
+    print("nums1",nums1);
+    print("nums2", nums2);
+    vector<int> result;
+
+    while (p1 < nums1.size() && p2 < nums2.size()){
+        if(nums1[p1] > nums2[p2]) {
+            p2++;
+        } else if(nums1[p1] < nums2[p2]) {
+            p1++;
+        }else{
+            result.push_back(nums1[p1]);
+            p1++;
+            p2++;
+        }
+    }
+    print("result", result);
+    return result;
 }
 
 int main() {
