@@ -14,8 +14,8 @@ void print(T name, const C &container)
     std::cout << '\n';
 }
 
- template <typename T, typename C>
- void print(std::string name,std::map<int, int> &mapping){
+template <typename T, typename C>
+void print(std::string name,std::map<int, int> &mapping){
     std::cout << "print map name: " << name << std::endl;
     for (auto &v: mapping){
         std::cout << v.first << " : " << v.second << std::endl;
