@@ -78,15 +78,47 @@ vector<vector<int>> reshape(vector<vector<int>> &mat, int r, int c){
 }
 
 
+vector<vector<int>> reshape2(vector<vector<int>> &mat, int r, int c){
+    vector<vector<int>> ans(r, vector<int> (c, 0));
+    int org_m = mat.size();
+    int org_n = mat[0].size();
+    if (org_m == 0) return mat;
+    if (org_m * org_n != r * c) return mat;
+    
+    for(int i{0}; i < org_m*org_n; i++){
+        int org_x = i/org_n;
+        int org_y = i%org_n;
+        int new_x = i/c;
+        int new_y = i%c;
+        cout << "org_x: " << org_x << endl;
+        cout << "org_y: " << org_y << endl;
+        cout << "new_x: " << new_x << endl;
+        cout << "new_y: " << new_y << endl;
+        cout << endl;
+        ans[new_x][new_y] = mat[org_x][org_y];
+    }
+    print<string, vector2d>("reshpe2 2d result: ", ans);
+    
+    return ans;
+
+    
+    
+}
+
 
 int main() {
-    vector<vector<int>> mat {{1,2}, {3,4}}; 
+    vector<vector<int>> mat 
+    {
+        {1,2},
+        {3,4}
+    }; 
     int r = 1;
     int c = 4;
     print<string, vector2d>("2d", mat);
     cout << endl;
     reshape(mat, r, c);
     cout << endl;
+    reshape2(mat,r,c);
 
 
 

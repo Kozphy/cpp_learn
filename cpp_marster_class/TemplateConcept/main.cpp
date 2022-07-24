@@ -1,4 +1,5 @@
 #include <iostream>
+#include <concepts>
 
 // An alternative to static asserts and type traits
 template <typename T>
