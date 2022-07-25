@@ -61,9 +61,6 @@ vector2d pascal(int numRows){
     }
     print<string, vector2d>("init result", result);
 
-    if (numRows == 1){
-        return vector2d{{1}};
-    }
 
     for (int i{0}; i < numRows; i++) {
         for(int j{0}; j <= i; j++){
