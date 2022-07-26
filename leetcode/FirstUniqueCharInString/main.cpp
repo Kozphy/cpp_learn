@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
+#include <queue>
 
 
 using namespace std;
@@ -56,50 +57,76 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping){
     return true;
 }
 
-bool searchMatrix(vector2d<int> &matrix, int target){
-    
-    int row = static_cast<int>(matrix.size());
-    int col = static_cast<int>(matrix[0].size());
+int firstUniqueCharInString(string &s){
+    map<char, int> mapping_count;
+    map<char, int> mapping_index;
+    int index = 0;
 
+    for(auto &v: s) {
+        if (mapping_count.count(v)){
+            mapping_count[v]++;
 
-    for(int i = 0; i < row; i++){
-        int left_p = 0;
-        int right_p = col - 1;
-        for(int j = 0; j < col; j++){
-            if (target > matrix[i][col-1]){
-                continue;
-            }else{
-                int mid = (left_p + right_p) / 2;
-                cout << "mid: " << mid << endl;
-                cout << "left_p: " << left_p <<  endl;
-                cout << "right_p: " << right_p << endl;
-                cout << "matrix[i][mid]: " << matrix[i][mid] << endl;
-                if(target == matrix[i][mid]) {
-                    return true;
-                }else if(target > matrix[i][mid]){
-                    left_p = ++mid;
-                }else{
-                    right_p = --mid;
-                }
-                cout << endl;
-            }
+        }else{
+            mapping_count[v] = 1;
+            mapping_index[v] = index;
+        }
+        index++;
+    }
+
+    int smaller = 999999;
+    for(auto &[k, v]: mapping_count){
+        if (v == 1 && smaller > mapping_index[k]){
+            smaller = mapping_index[k];
         }
     }
-    return false;
+
+    if (smaller == 999999){
+        return -1;
+    }
+    return smaller;
+
+}
+
+int firstUniqueCharInString_queue(string &s){
+    map<char, int> mapping;
+    queue<char> qu;
+
+    for(int i = 0; i < s.length(); i++){
+        qu.push(s[i]);
+        if(mapping.count(s[i])){
+            mapping[s[i]]++;
+        }else{
+            mapping[s[i]] = 1;
+        }
+    }
+
+    for (int i = 0; i < s.length(); i++){
+        if(mapping[qu.front()] == 1){
+            return i;
+        }
+        qu.pop();
+    }
+    return -1;
+
+}
+
+int firstUniqueCharInString3(string &s){
+    return -1;
 }
 
 
+TODO: improve execute time
 int main() {
-    vector2d<int> matrix
-    {
-        {1,3,5,7},
-        {10,11,16,20},
-        {23,30,34,60}
-    };
-    int target = 60;
-    bool result = searchMatrix(matrix, target);
+    string s = "loveleetcode";
+    int result = firstUniqueCharInString(s);
     cout << "result: " << result << endl;
-    
+    cout << endl;
+    int result_queue = firstUniqueCharInString_queue(s);
+    cout << "result queue: " << result_queue << endl;
+    cout << endl;
+    int result3 = firstUniqueCharInString3(s);
+    cout << "result 3: " << result3 << endl;
+
 
 
 

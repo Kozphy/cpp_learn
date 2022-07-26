@@ -3,6 +3,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
+#include <queue>
 
 
 using namespace std;
@@ -56,50 +57,41 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping){
     return true;
 }
 
-bool searchMatrix(vector2d<int> &matrix, int target){
-    
-    int row = static_cast<int>(matrix.size());
-    int col = static_cast<int>(matrix[0].size());
+bool RansonNote(string ransomNote, string magazine){
+    map<char, int> r_mapping;
+    map<char, int> m_mapping;
 
+    for (int i = 0; i < ransomNote.length(); i++){
+        r_mapping[ransomNote[i]]++;
+    }
 
-    for(int i = 0; i < row; i++){
-        int left_p = 0;
-        int right_p = col - 1;
-        for(int j = 0; j < col; j++){
-            if (target > matrix[i][col-1]){
-                continue;
-            }else{
-                int mid = (left_p + right_p) / 2;
-                cout << "mid: " << mid << endl;
-                cout << "left_p: " << left_p <<  endl;
-                cout << "right_p: " << right_p << endl;
-                cout << "matrix[i][mid]: " << matrix[i][mid] << endl;
-                if(target == matrix[i][mid]) {
-                    return true;
-                }else if(target > matrix[i][mid]){
-                    left_p = ++mid;
-                }else{
-                    right_p = --mid;
-                }
-                cout << endl;
+    for (int i = 0; i < magazine.length(); i++){
+        m_mapping[magazine[i]]++;
+    }
+
+    for(auto &[k,v]: r_mapping){
+        if (m_mapping[k]){
+            if((v - m_mapping[k]) > 0){
+                return false;
             }
+        }else if(!m_mapping[k]){
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 
+TODO: improve execute time
 int main() {
-    vector2d<int> matrix
-    {
-        {1,3,5,7},
-        {10,11,16,20},
-        {23,30,34,60}
-    };
-    int target = 60;
-    bool result = searchMatrix(matrix, target);
+    string ransomNote = "a";
+    string magazine = "b";
+    bool result = RansonNote(ransomNote, magazine);
+    cout << boolalpha;
     cout << "result: " << result << endl;
-    
+    cout << endl;
+
+
 
 
 
