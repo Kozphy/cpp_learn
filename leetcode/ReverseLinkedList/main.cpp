@@ -94,6 +94,8 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping){
     return true;
 }
 
+
+
 void linkNode(vector<ListNode> &list_node, int pos = -1){
     // link node
     for (int i = 0; i < list_node.size(); i++){
@@ -105,118 +107,72 @@ void linkNode(vector<ListNode> &list_node, int pos = -1){
     }
 }
 
-ListNode *mergeTwoLists(ListNode *list1, ListNode *list2){
-    ListNode *head{nullptr};
-    ListNode *temp{nullptr};
-    head = new ListNode();
-    temp = head;
+// TODO: fix error
+ListNode *reverseLinkListed(ListNode *head){
+    ListNode *preNode = head;    
+    ListNode *curNode = head;
+    ListNode *nextNode = nullptr;
 
-    while(list1 && list2){
-        if(list1 -> val <= list2 -> val){
-            temp -> next = list1;
-            list1 = list1 -> next;
-        }else{
-            temp -> next = list2;
-            list2 = list2 -> next;
-        }
-        temp = temp -> next;
+    if (!head || !head -> next){
+        return head;
     }
 
-    if(list1){
-        temp -> next = list1;
-        list1 = list1 -> next;
-    }
-    if(list2){
-        temp -> next = list2;
-        list2 = list2 -> next;
+    while(curNode && curNode -> next){
+        curNode = curNode -> next;
+        nextNode = curNode -> next;
+        cout << "preNode val: " << preNode -> val << endl;
+        cout << "curNode val: " << curNode -> val << endl;
+        cout << "nextNode val: " << nextNode -> val << endl;
+        preNode -> next = NULL;
+        preNode = curNode;
+        curNode -> next = head;
+        curNode = nextNode;
     }
 
-    head = head -> next;
-
-   return head; 
+    return head;
 }
 
-ListNode *mergeTwoLists2(ListNode *list1, ListNode *list2){
-    if (list1 == NULL){
-        return list2;
-    }
-    if(list2 == NULL){
-        return list1;
+ListNode *reverseLinkListed2(ListNode *head){
+    if(head == NULL || head -> next == NULL){
+        cout << "last node val: " <<  head -> val << endl;
+        return head;
     }
 
-    if(list1 -> val <= list2 -> val){
-        list1 -> next = mergeTwoLists2(list1 -> next, list2);
-        return list1;
-    }else{
-        list2 -> next = mergeTwoLists2(list1, list2 -> next);
-        return list2;
+    if(head && head -> next){
+        cout << "head val: " << head -> val << endl;
+        ListNode *tail = reverseLinkListed(head -> next);
+        head -> next -> next = head;
+        head -> next = NULL;
+        return tail;
     }
+    return head;
 }
-
-// refactor mergeTwoLists iterator
-ListNode *mergeTwoLists3(ListNode *list1, ListNode *list2){
-    if(!list1){
-        return list2;
-    }
-
-    if(!list2){
-        return list1;
-    }
-
-    ListNode head = ListNode();
-    ListNode *p1 = &head;
-    while(list1 && list2){
-        if(list1 -> val <= list2 -> val){
-            p1 -> next = list1;
-            list1 = list1 -> next;
-        }else{
-            p1 -> next = list2;
-            list2 = list2 -> next;
-        }
-        p1 = p1 -> next;
-    }
-
-    if(list1){
-        p1 -> next = list1;
-    }
-    if(list2){
-        p1 -> next = list2;
-    }
-
-    return head.next;
-}
-
-
 
 int main() {
     // int pos = 1;
-    vector<ListNode> list1 = {
+    vector<ListNode> head = {
         ListNode(1),
         ListNode(2),
-        ListNode(4),
-    };
-    vector<ListNode> list2 = {
-        ListNode(1),
         ListNode(3),
         ListNode(4),
+        ListNode(5),
     };
+    int val = 7;
 
-    linkNode(list1);
-    linkNode(list2);
+    linkNode(head);
 
-    print("list1: ", list1);
-    print("list2: ", list2);
-    // ListNode *result = mergeTwoLists(&list1[0], &list2[0]);
-    // cout << boolalpha;
-    // print("result ListNode: ", result);
-    // cout << endl;
-    // ListNode *result2 = mergeTwoLists2(&list1[0], &list2[0]);
+    // print("head: ", head);
+    ListNode *result = reverseLinkListed(&head[0]);
+    cout << boolalpha;
+    print("result ListNode: ", result);
+
+    // ListNode *result2 = reverseLinkListed2(&head[0]);
     // cout << boolalpha;
     // print("result2 ListNode: ", result2);
-    cout << endl;
-    ListNode *result3 = mergeTwoLists3(&list1[0], &list2[0]);
-    cout << boolalpha;
-    print("result3 ListNode: ", result3);
+    // cout << endl;
+
+
+
 
     return 0;
 }

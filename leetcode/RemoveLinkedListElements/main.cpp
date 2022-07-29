@@ -138,6 +138,35 @@ ListNode *removeElements(ListNode *head, int val){
     return result;
 }
 
+ListNode *removeElements2(ListNode *head, int val){
+    if (!head){
+        return NULL;
+    }
+    ListNode dummy = ListNode();
+    ListNode *prev_p1 = &dummy;
+    ListNode *cur_p2 = head;
+
+    while(cur_p2 && cur_p2 -> next){
+        cout << "cur_p2 val: " << cur_p2 -> val << endl;
+        if(cur_p2 -> val == val){
+           prev_p1 -> next = cur_p2 -> next; 
+        }else{
+            prev_p1 -> next = cur_p2;
+            prev_p1 = prev_p1 -> next;
+        }
+        cur_p2 = cur_p2 -> next;
+    }
+
+    if(cur_p2 -> val == val){
+        prev_p1 -> next = NULL;
+    }else{
+        prev_p1 -> next = cur_p2;
+    }
+
+    return dummy.next;
+
+}
+
 int main() {
     // int pos = 1;
     vector<ListNode> head = {
@@ -148,17 +177,19 @@ int main() {
         ListNode(7),
         ListNode(7),
         ListNode(7),
-
     };
-    int val = 1;
+    int val = 7;
 
     linkNode(head);
 
-    print("head: ", head);
-    ListNode *result = removeElements(&head[0], val);
-    cout << boolalpha;
-    print("result ListNode: ", result);
+    // print("head: ", head);
+    // ListNode *result = removeElements(&head[0], val);
+    // cout << boolalpha;
+    // print("result ListNode: ", result);
     // cout << endl;
+    ListNode *result2 = removeElements2(&head[0], val);
+    cout << boolalpha;
+    print("result ListNode: ", result2);
 
 
 
