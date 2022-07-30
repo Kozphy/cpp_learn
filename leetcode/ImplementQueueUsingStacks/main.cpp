@@ -4,7 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <queue>
-
+#include <stack>
 
 using namespace std;
 
@@ -107,69 +107,64 @@ void linkNode(vector<ListNode> &list_node, int pos = -1){
     }
 }
 
-// iterator
-ListNode *reverseLinkListed(ListNode *head){
-    ListNode *preNode = nullptr;    
-    ListNode *curNode = head;
-    ListNode *nextNode = nullptr;
+class MyQueue{
+    public:
+        int firstvalue{};
+        stack<int> st{};
+        stack<int> reverse_st{};
+    public:
+        MyQueue() {}
+        void push(int x){
+            st.push(x);
+        }
+        int pop(){
+            while(!st.empty()){
+                reverse_st.push(st.top());
+                st.pop();
+            }
+            firstvalue = reverse_st.top();
+            reverse_st.pop();
 
-    if (!head || !head -> next){
-        return head;
-    }
+            while(!reverse_st.empty()){
+                st.push(reverse_st.top());
+                reverse_st.pop();
+            }
+            return firstvalue;
+        }
+        int peek(){
+            while(!st.empty()){
+                reverse_st.push(st.top());
+                st.pop();
+            }
+            firstvalue = reverse_st.top();
 
-    while(head && head -> next){
-        head = head -> next;
-        cout << "curNode val: " << curNode -> val << endl;
-        nextNode = head;
-        curNode -> next = preNode;
-        preNode = curNode;
-        curNode = nextNode;
-    }
-
-    // process last node
-    head -> next = preNode;
-    return head;
-}
-
-// recursive
-ListNode *reverseLinkListed2(ListNode *head){
-    if(head == NULL || head -> next == NULL){
-        cout << "last node val: " <<  head -> val << endl;
-        return head;
-    }
-
-    if(head && head -> next){
-        cout << "head val: " << head -> val << endl;
-        ListNode *tail = reverseLinkListed(head -> next);
-        head -> next -> next = head;
-        head -> next = NULL;
-        return tail;
-    }
-    return head;
-}
+            while(!reverse_st.empty()){
+                st.push(reverse_st.top());
+                reverse_st.pop();
+            }
+            return firstvalue;
+        }
+        bool empty(){
+            if (st.size() == 0){
+                return true;
+            }
+            return false;
+        }
+};
 
 int main() {
-    // int pos = 1;
-    vector<ListNode> head = {
-        ListNode(1),
-        ListNode(2),
-        ListNode(3),
-        ListNode(4),
-        ListNode(5),
-    };
-    int val = 7;
-
-    linkNode(head);
-
-    // print("head: ", head);
-    ListNode *result = reverseLinkListed(&head[0]);
+    MyQueue *obj = new MyQueue();
+    obj -> push(1);
+    obj -> push(2);
+    // obj -> push(3);
+    int param_3 = obj -> peek();
+    cout << "peek value: " << param_3 << endl;
+    int param_2 = obj -> pop();
+    cout << "pop value: " << param_2 << endl;
+    int param_4 = obj -> empty();
     cout << boolalpha;
-    print("result ListNode: ", result);
+    cout << "whether empty: " << param_4 << endl;
 
-    // ListNode *result2 = reverseLinkListed2(&head[0]);
-    // cout << boolalpha;
-    // print("result2 ListNode: ", result2);
-    // cout << endl;
 
 
 

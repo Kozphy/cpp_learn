@@ -108,61 +108,47 @@ void linkNode(vector<ListNode> &list_node, int pos = -1){
 }
 
 // iterator
-ListNode *reverseLinkListed(ListNode *head){
-    ListNode *preNode = nullptr;    
+ListNode *deleteDuplicates(ListNode *head){
+    if(!head){
+        return head;
+    }
+    ListNode *firstNode = head;
     ListNode *curNode = head;
     ListNode *nextNode = nullptr;
 
-    if (!head || !head -> next){
-        return head;
-    }
 
-    while(head && head -> next){
-        head = head -> next;
-        cout << "curNode val: " << curNode -> val << endl;
-        nextNode = head;
-        curNode -> next = preNode;
-        preNode = curNode;
-        curNode = nextNode;
-    }
-
-    // process last node
-    head -> next = preNode;
-    return head;
-}
-
-// recursive
-ListNode *reverseLinkListed2(ListNode *head){
-    if(head == NULL || head -> next == NULL){
-        cout << "last node val: " <<  head -> val << endl;
-        return head;
-    }
-
-    if(head && head -> next){
+    while(curNode && curNode -> next){
         cout << "head val: " << head -> val << endl;
-        ListNode *tail = reverseLinkListed(head -> next);
-        head -> next -> next = head;
-        head -> next = NULL;
-        return tail;
+        nextNode = curNode -> next;
+        cout << "curNode val: " << curNode -> val << endl;
+        cout << "nextNode val: " << nextNode->val << endl;
+        if(curNode -> val == nextNode -> val){
+            curNode -> next = nextNode -> next;
+        }else{
+            curNode = curNode -> next;
+        }
     }
-    return head;
+
+    return firstNode;
 }
+
+
 
 int main() {
     // int pos = 1;
     vector<ListNode> head = {
         ListNode(1),
-        ListNode(2),
-        ListNode(3),
-        ListNode(4),
-        ListNode(5),
+        ListNode(1),
+        ListNode(1),
+        // ListNode(3),
+        // ListNode(3),
     };
     int val = 7;
 
     linkNode(head);
 
     // print("head: ", head);
-    ListNode *result = reverseLinkListed(&head[0]);
+    ListNode *result = deleteDuplicates(&head[0]);
     cout << boolalpha;
     print("result ListNode: ", result);
 

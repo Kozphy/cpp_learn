@@ -4,7 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <queue>
-
+#include <stack>
 
 using namespace std;
 
@@ -107,64 +107,35 @@ void linkNode(vector<ListNode> &list_node, int pos = -1){
     }
 }
 
-// iterator
-ListNode *reverseLinkListed(ListNode *head){
-    ListNode *preNode = nullptr;    
-    ListNode *curNode = head;
-    ListNode *nextNode = nullptr;
+bool isValid(string s){
+    stack<char> st;
 
-    if (!head || !head -> next){
-        return head;
+    for (int i = 0; i < s.length(); i++){
+        cout << i << endl;
+        if (s[i] == '(' || s[i] == '{' || s[i] == '['){
+            st.push(s[i]);
+        }else{
+            if(st.empty() == 1) return false;
+            char v = st.top();
+            if (v == '(' && s[i] == ')' || v == '{' && s[i] == '}' || v == '[' && s[i] == ']'){
+                st.pop();
+            }else{
+                return false;
+            }
+        }
     }
-
-    while(head && head -> next){
-        head = head -> next;
-        cout << "curNode val: " << curNode -> val << endl;
-        nextNode = head;
-        curNode -> next = preNode;
-        preNode = curNode;
-        curNode = nextNode;
-    }
-
-    // process last node
-    head -> next = preNode;
-    return head;
+    return st.empty(); 
 }
 
-// recursive
-ListNode *reverseLinkListed2(ListNode *head){
-    if(head == NULL || head -> next == NULL){
-        cout << "last node val: " <<  head -> val << endl;
-        return head;
-    }
 
-    if(head && head -> next){
-        cout << "head val: " << head -> val << endl;
-        ListNode *tail = reverseLinkListed(head -> next);
-        head -> next -> next = head;
-        head -> next = NULL;
-        return tail;
-    }
-    return head;
-}
 
 int main() {
-    // int pos = 1;
-    vector<ListNode> head = {
-        ListNode(1),
-        ListNode(2),
-        ListNode(3),
-        ListNode(4),
-        ListNode(5),
-    };
-    int val = 7;
+    string s = "()";
 
-    linkNode(head);
-
-    // print("head: ", head);
-    ListNode *result = reverseLinkListed(&head[0]);
+    bool result = isValid(s);
     cout << boolalpha;
-    print("result ListNode: ", result);
+    cout << result << endl;
+    // print("result: ", result);
 
     // ListNode *result2 = reverseLinkListed2(&head[0]);
     // cout << boolalpha;
