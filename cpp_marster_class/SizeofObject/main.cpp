@@ -31,7 +31,7 @@ int main() {
     
     // string is storing our text here as const char *
     // and what we have is a pointer inside which probably have inside is a member variable which is a pointer.
-    // So the sizeof name is counting for size of pointer but it's not sizeof what is pointed to.
+    // So the sizeof(name) is counting for size of pointer but it's not sizeof what is pointed to.
     string name{"fdsiwerhfkldsaghklcvxworefsdhkkj!"};
     cout << "sizeof(name): " << sizeof(name) << endl;
 

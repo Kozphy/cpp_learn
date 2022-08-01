@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <variant>
 #include "tree.h"
 #include "linklisted.h"
 
@@ -101,13 +102,13 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping)
 }
 
 
-
+// Iterative
 vector<int> preorderTraversal(TreeNode *root)
 {
     vector<int> result{};
     stack<TreeNode *> children_roots{};
-    TreeNode *left_p1{root->left};
-    TreeNode *right_p1(root->right);
+    TreeNode *left_p1{nullptr};
+    TreeNode *right_p1(nullptr);
 
     if (!root)
     {
@@ -116,26 +117,26 @@ vector<int> preorderTraversal(TreeNode *root)
 
     result.push_back(root->val);
 
-    if(!left_p1)
+    if(root -> left)
     {
-        result.push_back(left_p1 -> val);
+       left_p1 = root->left; 
     }
 
-    if(!right_p1)
+
+    if(root -> right)
     {
-        result.push_back(right_p1 -> val);
+        right_p1 = root->right;
     }
 
-    while (left_p1 && left_p1->left)
+    while (left_p1)
     {
         result.push_back(left_p1->val);
         children_roots.push(left_p1);
-        left_p1 = left_p1->left;
-    }
-
-    // add left side last value
-    if(left_p1){
-        result.push_back(left_p1 -> val);
+        if(left_p1 -> left){
+            left_p1 = left_p1->left;
+        }else{
+            left_p1 = NULL;
+        }
     }
 
 
@@ -149,29 +150,58 @@ vector<int> preorderTraversal(TreeNode *root)
         children_roots.pop();
     }
 
-    while (right_p1 && right_p1->right)
+
+    print("result1: ", result);
+    while (right_p1)
     {
+        result.push_back(right_p1 -> val);
         if(right_p1 -> left){
             result.push_back(right_p1 -> left -> val);
         }
-        result.push_back(right_p1 -> val);
-        right_p1 = right_p1-> right;
+        if(right_p1 -> right){
+            right_p1 = right_p1-> right;
+        }else{
+            right_p1 = NULL;
+        }
     }
 
-    // add right last value
-    if(right_p1)
-    {
-        result.push_back(right_p1 -> val);
-    }
+    print("result2: ", result);
+
+    return result;
 }
 
 int main()
 {
-    TreeNode binary_root = TreeNode(1);
-    // TODO: fix no matching function
-    TreeNode second_root = addNodeToTree(binary_root, TreeNode(2), false, true);
-    addNodeToTree(second_root, TreeNode(3), true, false);
-    preorderTraversal(&binary_root);
+    vector<int> root = {3,2,NULL,NULL,4,1};
+    // map<int, vector<variant<bool, int>>> node_val = 
+    // {
+    //     {0, {2, false, true}},
+    //     {1, {3, true, false}},
+    // };
+    TreeNode root_node = create_binary_tree(root);
+    preorderTraversal(&root_node);
+    // TreeNode root_node = TreeNode(3);
+    // TreeNode second = TreeNode(2);
+    // TreeNode third = TreeNode(4);
+    // TreeNode fourth = TreeNode(1);
+    // root_node.left = &second;
+    // second.right = &third;
+    // third.left = &fourth;
+
+    // TreeNode newNode = NULL;
+    // TreeNode preNode = NULL;
+    // for (int i = 0; i < node_val.size(); i++){
+    //     newNode = TreeNode(get<int>(node_val[i][0]));
+    //     if (i == 0){
+    //         preNode = addNodeToTree(root_node, newNode, get<bool>(node_val[i][1]),
+    //         get<bool>(node_val[i][2]));
+    //     }else{
+    //         preNode = addNodeToTree(preNode, newNode, get<bool>(node_val[i][1]),
+    //         get<bool>(node_val[i][2]));
+    //     }
+    // }
+    // cout << "root_node val: " << root_node.val << endl;
+    // cout << "rootNode right: " << root_node.right->val << endl;
 
     return 0;
 }
