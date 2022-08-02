@@ -103,28 +103,60 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping)
 
 
 // Iterative
-vector<int> preorderTraversal(TreeNode *root)
+vector<int> InorderTraversal(TreeNode *root)
 {
     vector<int> result{};
-    stack<TreeNode *> all_roots{};
+    stack<TreeNode *> left_subtree{};
+    stack<TreeNode *> right_subtree{};
+    TreeNode *right_subtree_pre_node = NULL;
 
     if (!root)
     {
         return result;
     }
 
-    all_roots.push(root);
+    // left subtree
+    if(root -> left){
+        left_subtree.push(root -> left);
+    }
 
-    while(all_roots.empty() != 1){
-        TreeNode *node = all_roots.top();
-        all_roots.pop();
-        result.push_back(node -> val);
-        if(node -> right){
-            all_roots.push(node -> right);
-        }
+    while(left_subtree.empty() != 1){
+        TreeNode *node = left_subtree.top();
         if(node -> left){
-            all_roots.push(node -> left);
+            left_subtree.push(node -> left);
+        }else{
+            result.push_back(node -> val);
+            if(node -> right){
+                left_subtree.push(node -> right);
+            }
+            left_subtree.pop();
         }
+    }
+
+    result.push_back(root -> val);
+
+    // TODO: fix right subtree
+    // right subtree
+    if(root -> right){
+        right_subtree.push(root -> right);
+    }
+
+    while(right_subtree.empty() != 1){
+        TreeNode *node = right_subtree.top();
+        // if(node -> right){
+        //     right_subtree_pre_node = node;
+        //     right_subtree.push(node -> right);
+        // }else if(node -> left){
+        //     right_subtree.push(node -> left);
+        // }else{
+        //     right_subtree.push(right_subtree_pre_node);
+        //     if(right_subtree_pre_node -> left){
+        //         right_subtree.push(right_subtree_pre_node -> left);
+        //     }
+        //     result.push_back(node -> val);
+        //     right_subtree.pop();
+        // }
+
     }
 
     print("result1: ", result);
@@ -144,7 +176,7 @@ void traversal(TreeNode *root, vector<int> &arr){
     }
 }
 
-vector<int> preorderTraversal2(TreeNode *root)
+vector<int> InorderTraversal2(TreeNode *root)
 {
     vector<int> result{};
     
@@ -155,18 +187,12 @@ vector<int> preorderTraversal2(TreeNode *root)
 
 int main()
 {
-    vector <int> root = {3,2,0,0,4,1};
+    vector <int> root = {1,0,2,3};
 
     TreeNode *root_node = create_binary_tree(root);
-    // TreeNode root_node = TreeNode(3);
-    // TreeNode second = TreeNode(2);
-    // TreeNode third = TreeNode(4);
-    // TreeNode fourth = TreeNode(1);
-    // root_node.left = &second;
-    // second.right = &third;
-    // third.left = &fourth;
-    preorderTraversal(root_node);
-    preorderTraversal2(root_node);
+
+    InorderTraversal(root_node);
+    // InorderTraversal2(root_node);
 
 
 
