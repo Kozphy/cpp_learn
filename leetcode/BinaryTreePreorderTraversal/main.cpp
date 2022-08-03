@@ -130,32 +130,68 @@ vector<int> preorderTraversal(TreeNode *root)
     print("result1: ", result);
     return result;
 }
+vector<int> preorderTraversal2(TreeNode *root){
+    vector<int> res{};
+    stack<TreeNode *> st{};
+    TreeNode *curr_node = root;
+
+    if(!root){
+        return res;
+    }
+
+    while(curr_node || st.empty() != 1){
+        while(curr_node){
+            st.push(curr_node);
+            res.push_back(curr_node -> val);
+            curr_node = curr_node-> left;
+        }
+        curr_node = st.top();
+        st.pop();
+        curr_node = curr_node -> right;
+        
+    }
+    print("result2: ", res);
+    return res;
+}
 
 // recursive
-void traversal(TreeNode *root, vector<int> &arr){
+void traversal(TreeNode *root, vector<int> &res){
     if(root != NULL){
-        arr.push_back(root -> val);
+        res.push_back(root -> val);
         if(root -> left){
-            traversal(root->left, arr);
+            traversal(root->left, res);
         }
         if(root -> right){
-            traversal(root->right, arr);
+            traversal(root->right, res);
         }
     }
 }
 
-vector<int> preorderTraversal2(TreeNode *root)
+vector<int> preorderTraversal3(TreeNode *root)
 {
     vector<int> result{};
     
     traversal(root, result);
-    print("result2: ", result);
+    print("result3: ", result);
     return result;
+}
+
+vector<int> preorderTraversal4(TreeNode *root)
+{
+    vector<int> res{};
+    if(!root){
+        return res;
+    }
+    res.push_back(root -> val);
+    traversal(root -> left, res);
+    traversal(root -> right, res);
+    print("result4: ", res);
+    return res;
 }
 
 int main()
 {
-    vector <int> root = {3,2,0,0,4,1};
+    vector <int> root = {11,7,15,5,9,13,20,3,6,8,10,12,14,18,25};
 
     TreeNode *root_node = create_binary_tree(root);
     // TreeNode root_node = TreeNode(3);
@@ -167,6 +203,8 @@ int main()
     // third.left = &fourth;
     preorderTraversal(root_node);
     preorderTraversal2(root_node);
+    preorderTraversal3(root_node);
+    preorderTraversal4(root_node);
 
 
 
