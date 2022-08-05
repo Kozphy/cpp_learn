@@ -111,7 +111,7 @@ vector<int> InorderTraversal(TreeNode *root)
 
     if(!root){
         return res;
-    }
+    }ss
 
     while(curr_node || st.empty() != 1){
         while (curr_node) {
@@ -133,7 +133,7 @@ void traversal(TreeNode *root, vector<int> &res){
     if(root == NULL){
         return;
     }
-    
+
     traversal(root->left, res);
     res.push_back(root -> val);
     traversal(root->right, res);

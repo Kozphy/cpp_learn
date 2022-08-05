@@ -148,7 +148,6 @@ vector<int> PostOrderTraversal(TreeNode *root){
     return res;
 }
 
-// TODO: fix bug
 vector<int> PostOrderTraversal2(TreeNode *root)
 {
     vector<int> res{};
@@ -160,11 +159,9 @@ vector<int> PostOrderTraversal2(TreeNode *root)
         return res;
     }
 
-    st.push(root);
      
     while(curr_node || st.empty() != 1){
         if(curr_node != NULL){
-            cout <<"one: "<<  curr_node -> val << endl;
             st.push(curr_node);
             curr_node = curr_node -> left;
         }else{
@@ -172,17 +169,12 @@ vector<int> PostOrderTraversal2(TreeNode *root)
             if(curr_node -> right != NULL && curr_node -> right != pop_node){
                 curr_node = curr_node -> right;
             }else{
-                cout << "two: " << curr_node -> val<< endl;
                 res.push_back(curr_node -> val);
                 st.pop();
                 pop_node = curr_node;
                 curr_node = NULL;
             }
         }
-        cout << "stack: " << endl;
-        printStack(st);
-        cout << endl;
-        print("res", res);
     }
 
     print("result2: ", res);
@@ -196,8 +188,8 @@ void traversal(TreeNode *root, vector<int> &res){
     }
     
     traversal(root->left, res);
-    res.push_back(root -> val);
     traversal(root->right, res);
+    res.push_back(root -> val);
 }
 
 vector<int> PostOrderTraversal3(TreeNode *root)
@@ -209,8 +201,8 @@ vector<int> PostOrderTraversal3(TreeNode *root)
     }
 
     traversal(root -> left, res);
-    res.push_back(root -> val);
     traversal(root -> right, res);
+    res.push_back(root -> val);
     print("result3: ", res);
     return res;
 }
@@ -219,12 +211,12 @@ int main()
 {
     // vector <int> root = {11,7,15,5,9,13,20,3,6,8,10,12,14,18,25};
 
-    vector <int> root = {1,2,3};
+    vector <int> root = {1,2};
     TreeNode *root_node = create_binary_tree(root);
 
     // PostOrderTraversal(root_node);
     PostOrderTraversal2(root_node);
-    // PostOrderTraversal3(root_node);
+    PostOrderTraversal3(root_node);
 
 
 
