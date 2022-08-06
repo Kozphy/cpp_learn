@@ -124,145 +124,48 @@ bool create_hashmap(vector<T> &nums, map<T, C> &mapping)
 }
 
 
-// Iterative
-vector<vector<int>> levelOrderTraversal(TreeNode *root){
-    vector<vector<int>> res{};
-    queue<TreeNode *> qu;
-    int level = 0;
-
-    if(!root){
-        return res;
-    }
-
-    qu.push(root);
-
-    while(qu.size()){
-        int level_size = qu.size();
-        // cout << "level_size: " << level_size << endl;
-        // cout << "level: "  << level << endl;
-        res.resize(level + 1);
-        res[level].resize(level_size);
-        // cout << "res.size(): " << res.size() << endl;;
-        // cout << "res" << "[" << level << "].size(): " << res[level].size() << endl;
-        for(int i = 0; i< level_size; i++){
-            TreeNode *curr_node = qu.front();
-            // cout << "i: " << i << endl;
-            // cout << "curr_node val: " << curr_node->val << endl;
-            res[level][i] = curr_node -> val;
-            qu.pop();
-            if(curr_node -> left){
-                qu.push(curr_node -> left);
-            }
-            if(curr_node -> right){
-                qu.push(curr_node -> right);
-            }
-        }
-        level+=1;
-
-        // cout << endl;
-
-    }
-
-    print("result1", res);
-    return res;
-}
-
-vector<vector<int>> levelOrderTraversal2(TreeNode *root)
-{
-    vector<vector<int>> res{};
-    queue<TreeNode *> qu;
-    if(!root){
-        return res;
-    }
-
-    qu.push(root);
-
-    while(qu.size()){
-        int level_size = qu.size();
-        vector<int> level_nodes{};
-        for(int i = 0; i< level_size; i++){
-            TreeNode *curr_node = qu.front();
-            level_nodes.push_back(curr_node -> val);
-            qu.pop();
-            if(curr_node -> left){
-                qu.push(curr_node -> left);
-            }
-            if(curr_node -> right){
-                qu.push(curr_node -> right);
-            }
-        }
-        res.push_back(level_nodes);
-    }
-
-    print("result2", res);
-    return res;
-
-}
-
-// TODO: complete recursive
-// recursive
-int tree_height(TreeNode *root){
-
+// Iterative 
+// level_size = 2^level
+bool isSymmetric(TreeNode *root){
     if(root == NULL){
         return 0;
-    }else{
-        int lheight = tree_height(root -> left);
-        int rheight = tree_height(root -> right);
-        if(lheight > rheight){
-            return ++lheight;
-        }else{
-            return ++rheight;
-        }
     }
+
+    
+    return true;
 }
 
-void traversal(TreeNode *root, vector2d<int> &res, int level){
+
+
+// recursive
+int maxDepth2(TreeNode *root){
     if(root == NULL){
-        return;
+        return 0;
     }
-
-    if(level == 0){
-        res[0][0] = root -> val;
-    }
-    cout << 1 << endl;
-    res[level].push_back(root -> val);
-    traversal(root -> left, res, level++);
-    traversal(root -> right, res, level++);
-
+    int maxLeft = maxDepth(root -> left);
+    int maxRight = maxDepth(root -> right);
+    return max(maxLeft, maxRight) + 1;
 }
 
-vector2d<int> levelOrderTraversal3(TreeNode *root)
-{
-    vector2d<int> res{};
-    int h = tree_height(root);
-    int level;
 
-    if(root == NULL){
-        return res;
-    }
 
-    res.resize(h);
 
-    for(level = 0; level < h; level++){
-        res[level].resize(exp2(level));
-        traversal(root, res, level);
-    }
-
-    print("result3: ", res);
-    return res;
-}
 
 int main()
 {
-    vector <int> root = {11,7,15,5,9,13,20,3,6,8,10,12,14,18,25};
+    // vector <int> root = {11,7,15,5,9,13,20,3,6,8,10,12,14,18,25};
+
+    vector <int> root = {1,2,2,3,4,4,3};
 
     // vector <int> root = {3,9,20,15,7};
     // vector <int> root = {1,2};
     TreeNode *root_node = create_binary_tree(root);
 
-    levelOrderTraversal(root_node);
-    levelOrderTraversal2(root_node);
-    levelOrderTraversal3(root_node);
+    bool result = isSymmetric(root_node);
+    cout << "result: " << result << endl;
+    // int result2 = isSymmetric2(root_node);
+    // cout << "result2: " << result2 << endl;
+    // maxDepth2(root_node);
 
 
 
