@@ -130,22 +130,44 @@ bool isSymmetric(TreeNode *root){
     if(root == NULL){
         return 0;
     }
+    queue<TreeNode *> qu;
+    qu.push(root -> left);
+    qu.push(root -> right);
 
-    
+
+    while(qu.size()){
+        TreeNode *left = qu.front();
+        qu.pop();
+        TreeNode *right = qu.front();
+        qu.pop();
+
+        if(left == nullptr && right == nullptr){
+            continue;
+        }else if(left == nullptr || right == nullptr || left -> val != right -> val){
+            return false;
+        }
+
+        qu.push(left -> left);
+        qu.push(right -> right);
+
+        qu.push(left -> right);
+        qu.push(right -> left);
+    }
+
     return true;
 }
 
 
 
 // recursive
-int maxDepth2(TreeNode *root){
-    if(root == NULL){
-        return 0;
-    }
-    int maxLeft = maxDepth(root -> left);
-    int maxRight = maxDepth(root -> right);
-    return max(maxLeft, maxRight) + 1;
-}
+// int maxDepth2(TreeNode *root){
+//     if(root == NULL){
+//         return 0;
+//     }
+//     int maxLeft = maxDepth(root -> left);
+//     int maxRight = maxDepth(root -> right);
+//     return max(maxLeft, maxRight) + 1;
+// }
 
 
 
@@ -159,7 +181,13 @@ int main()
 
     // vector <int> root = {3,9,20,15,7};
     // vector <int> root = {1,2};
-    TreeNode *root_node = create_binary_tree(root);
+    // TODO: how avl tree Rotate, fix rotate bug 
+    // TODO: visualize tree
+    TreeNode *root_node = create_binary_tree(root, true);
+    vector<vector<int>> res = LevelOrderTraversal(root_node);
+    // print("levelOrderTraversal: ",res);
+    Display(0, root_node);
+    
 
     bool result = isSymmetric(root_node);
     cout << "result: " << result << endl;

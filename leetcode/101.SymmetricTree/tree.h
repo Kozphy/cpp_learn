@@ -14,7 +14,9 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right);
 };
 
-TreeNode *create_binary_tree(vector<int> &data);
-TreeNode *Insert(TreeNode *root, int &data);
+TreeNode *create_binary_tree(vector<int> &data, bool avl_balance);
+TreeNode *Insert(TreeNode *root, int &data, bool avl_balance);
+vector<vector<int>> LevelOrderTraversal(TreeNode *root);
+void Display(int level, TreeNode *ptr);
 
 #endif
